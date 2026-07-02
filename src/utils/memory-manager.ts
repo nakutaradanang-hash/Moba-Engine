@@ -43,7 +43,7 @@ export class MemoryManager {
   createPool<T extends PooledObject>(
     name: string,
     factory: () => T,
-    initialSize: number = 10,
+    initialSize: number = 10
   ): void {
     if (this.pools.has(name)) {
       console.warn(`Pool "${name}" already exists`);
@@ -73,9 +73,9 @@ export class MemoryManager {
     }
 
     if (pool.length > 0) {
-      const obj = pool.pop();
+      const obj = pool.pop() as T;
       obj._pooled = false;
-      return obj as T;
+      return obj;
     }
 
     // Create new object if pool is empty
